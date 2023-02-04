@@ -19,7 +19,7 @@ public class DrivingScript : MonoBehaviour
     public float currentGearPerc; 
     public int numGears = 5;
     
-    //public GameObject backLights;
+    public GameObject backLights;
 
 
     public void Drive(float accel, float brake, float steer)
@@ -28,10 +28,15 @@ public class DrivingScript : MonoBehaviour
         steer = Mathf.Clamp(steer, -1, 1) * maxSteerAngle;
         brake = Mathf.Clamp(brake, 0, 1) * maxBrakeTorque;
 
-        ////włączanie światła
-       //if (brake != 0) backLights.SetActive(true);
-       // else backLights.SetActive(false);
-        ////
+        //włączanie światła
+       if (brake != 0) 
+        {
+            backLights.SetActive(true);
+        }
+        else 
+        {
+            backLights.SetActive(false);
+        }
 
         float thrustTorque = 0;
 
