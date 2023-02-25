@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/KartTest.unity
+    guid: 7300e38aa3fb17b47b54c43a62b24d18
   m_configObjects: {}
