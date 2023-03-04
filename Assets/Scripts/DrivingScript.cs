@@ -20,6 +20,7 @@ public class DrivingScript : MonoBehaviour
     public int numGears = 5;
     
     public GameObject backLights;
+    public GameObject cameraTarget;
 
 
     public void Drive(float accel, float brake, float steer)
