@@ -357,7 +357,7 @@ MonoBehaviour:
   currentGearPerc: 0
   numGears: 5
   backLights: {fileID: 8309304931324866159}
-  cameraTarget: {fileID: 0}
+  cameraTarget: {fileID: 8928661916943615196}
 --- !u!114 &8309304929517171141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309304929517171146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c49eec9d8880cfe49a65e0d605c9ea72, type: 3}
   m_Name: 
@@ -377,7 +377,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8309304929517171146}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a6e716893630f7b4093e902b2f70a9c5, type: 3}
@@ -482,6 +482,8 @@ MonoBehaviour:
   carColor: {r: 0, g: 0, b: 0, a: 1}
   nameText: {fileID: 5482232296267223722}
   carRenderer: {fileID: 7246574849621254008}
+  playerNumber: 2
+  colorCar: {fileID: 0}
 --- !u!1 &8309304929594861327
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,7 +1375,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8928661916943615196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1416,7 +1418,7 @@ SphereCollider:
   m_GameObject: {fileID: 8928661916943615196}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
