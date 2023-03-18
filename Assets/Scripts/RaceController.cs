@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
+using Photon.Pun;
 
-public class RaceController : MonoBehaviour
+public class RaceController : MonoBehaviourPunCallbacks
 {
     public static bool racing = false;
     public static int totalLaps = 1;
@@ -22,13 +24,25 @@ public class RaceController : MonoBehaviour
     public Transform[] spawnPos;
     public int playerCount;
 
+    public GameObject startRace;
+    public GameObject waitingText;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        //playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
         endPanel.SetActive(false);
         audioSource = GetComponent<AudioSource>();
-        Debug.Log("--------------------------------");
-        InvokeRepeating("CountDown", 1, 1);
+        startText.gameObject.SetActive(false);
+        //InvokeRepeating("CountDown", 1, 1);
+
+        startRace.SetActive(true);
+        waitingText.SetActive(true);
+
+        int randomStartPosition = Random.Range(0, spawnPos.Length);
+        Vector3 startPos = spawnPos[randomStartPosition].position;
+        Quaternion startRot = spawnPos[randomStartPosition].rotation;
+        GameObject playerCar = null;
 
         for(int i = 0; i < playerCount; i++)
         {
@@ -36,6 +50,7 @@ public class RaceController : MonoBehaviour
             car.transform.position = spawnPos[i].position;
             car.transform.rotation = spawnPos[i].rotation;
             carPrefarb.GetComponent<CarAppearance>().playerNumber = i;
+
             if(car.GetComponent<CarAppearance>().playerNumber == 0)//remember this line
             {
                 car.GetComponent<PlayerController>().enabled = true;
@@ -105,5 +120,28 @@ public class RaceController : MonoBehaviour
     public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    [PunRPC]
+    public void StartGame()
+    {
+        InvokeRepeating("CountDown", 3, 1);
+        startRace.SetActive(false);
+        waitingText.SetActive(false);
+
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+        carsController = new CheckPointController[cars.Length];
+        for (int i = 0; i < cars.Length; i++)
+        {
+            carsController[i] = cars[i].GetComponent<CheckPointController>();
+        }
+    }
+
+    public void BeginGame()
+    {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("StartGame", RpcTarget.All, null);
+        }
     }
 }
