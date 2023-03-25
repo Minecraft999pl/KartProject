@@ -804,6 +804,7 @@ MonoBehaviour:
   carRenderer: {fileID: 3683136731025632218}
   playerNumber: 2
   colorCar: {fileID: 0}
+  backCamera: {fileID: 8556881520688317854}
 --- !u!114 &5156772817191397178
 MonoBehaviour:
   m_ObjectHideFlags: 0

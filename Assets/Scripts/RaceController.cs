@@ -27,14 +27,15 @@ public class RaceController : MonoBehaviourPunCallbacks
     public GameObject startRace;
     public GameObject waitingText;
 
+    public RawImage mirror;
+
     // Start is called before the first frame update
     void Awake()
     {
-        //playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+        playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
         endPanel.SetActive(false);
         audioSource = GetComponent<AudioSource>();
         startText.gameObject.SetActive(false);
-        //InvokeRepeating("CountDown", 1, 1);
 
         startRace.SetActive(true);
         waitingText.SetActive(true);
@@ -44,27 +45,57 @@ public class RaceController : MonoBehaviourPunCallbacks
         Quaternion startRot = spawnPos[randomStartPosition].rotation;
         GameObject playerCar = null;
 
-        for(int i = 0; i < playerCount; i++)
-        {
-            GameObject car = Instantiate(carPrefarb);
-            car.transform.position = spawnPos[i].position;
-            car.transform.rotation = spawnPos[i].rotation;
-            carPrefarb.GetComponent<CarAppearance>().playerNumber = i;
+        // for(int i = 0; i < playerCount; i++)
+        // {
+        //     GameObject car = Instantiate(carPrefarb);
+        //     car.transform.position = spawnPos[i].position;
+        //     car.transform.rotation = spawnPos[i].rotation;
+        //     carPrefarb.GetComponent<CarAppearance>().playerNumber = i;
 
-            if(car.GetComponent<CarAppearance>().playerNumber == 0)//remember this line
+        //     if(car.GetComponent<CarAppearance>().playerNumber == 0)//remember this line
+        //     {
+        //         car.GetComponent<PlayerController>().enabled = true;
+        //         GameObject.FindObjectOfType<AudioSource>().enabled = true;
+        //         GameObject.FindObjectOfType<CameraController>().SetCameraProperties(car);
+        //     }
+        // }
+
+        // GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
+        // carsController =  new CheckPointController[cars.Length];
+        // for(int i = 0; i < cars.Length; i++)
+        // {
+        //     carsController[i] = cars[i].GetComponent<CheckPointController>();
+        // }
+
+        if(PhotonNetwork.IsConnected)
+        {
+            startPos = spawnPos[PhotonNetwork.CurrentRoom.PlayerCount - 1].position;
+            startRot = spawnPos[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation;
+
+            object[] instanceData = new object[4];
+            instanceData[0] = (string)PlayerPrefs.GetString("PlayerName");
+            instanceData[1] = PlayerPrefs.GetString("Red");
+            instanceData[2] = PlayerPrefs.GetString("Green");
+            instanceData[3] = PlayerPrefs.GetString("Blue");
+
+            if(OnlinePlayer.LocalPlayerInstance == null)
             {
-                car.GetComponent<PlayerController>().enabled = true;
-                GameObject.FindObjectOfType<AudioSource>().enabled = true;
-                GameObject.FindObjectOfType<CameraController>().SetCameraProperties(car);
+                playerCar = PhotonNetwork.Instantiate(carPrefarb.name, startPos, startRot, 0, instanceData);
+                playerCar.GetComponent<CarAppearance>().SetLocalPlayer();
+            }
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                startRace.SetActive(true);
+            }
+            else
+            {
+                waitingText.SetActive(true);
             }
         }
 
-        GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
-        carsController =  new CheckPointController[cars.Length];
-        for(int i = 0; i < cars.Length; i++)
-        {
-            carsController[i] = cars[i].GetComponent<CheckPointController>();
-        }
+        playerCar.GetComponent<DrivingScript>().enabled = true;
+        playerCar.GetComponent<PlayerController>().enabled = true;
     }
 
     // Update is called once per frame
@@ -125,7 +156,7 @@ public class RaceController : MonoBehaviourPunCallbacks
     [PunRPC]
     public void StartGame()
     {
-        InvokeRepeating("CountDown", 3, 1);
+        InvokeRepeating("CountDown", 1, 1);
         startRace.SetActive(false);
         waitingText.SetActive(false);
 
@@ -143,5 +174,10 @@ public class RaceController : MonoBehaviourPunCallbacks
         {
             photonView.RPC("StartGame", RpcTarget.All, null);
         }
+    }
+
+    public void SetMirror(Camera backCamera)
+    {
+        mirror.texture = backCamera.targetTexture;
     }
 }
