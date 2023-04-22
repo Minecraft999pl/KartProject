@@ -13,6 +13,10 @@ public class CarAppearance : MonoBehaviour
     ColorCar colorCar;
     public Camera backCamera;
 
+    int carRego;
+    bool regoSet = false;
+    public CheckPointController checkPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +39,21 @@ public class CarAppearance : MonoBehaviour
         // nameText.color = carColor;
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        if (!regoSet)
+        {
+            carRego = Leaderboard.RegisterCar(playerName);
+            regoSet = true;
+            return;
+        }
+
+        Leaderboard.SetPosition(carRego, checkPoint.lap, checkPoint.checkPoint);
     }
 
     public void SetNameAndColor(string name, Color color)
     {
+        playerName = name;
         nameText.text = name;
         carRenderer.material.color = color;
         nameText.color = color;

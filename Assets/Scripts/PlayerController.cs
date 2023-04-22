@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
         float accel = Input.GetAxis("Vertical");
         float steer = Input.GetAxis("Horizontal");
         float brake = Input.GetAxis("Jump");
+        bool nitro = Input.GetKeyDown(KeyCode.LeftShift);
+
+        driveScript.Nitro(nitro);
 
         if(driveScript.rb.velocity.magnitude > 1 || !RaceController.racing) lastTimeMoving = Time.time;
         if(Time.time > lastTimeMoving + 4 || driveScript.rb.gameObject.transform.position.y < -5)

@@ -86,6 +86,7 @@ public class RaceController : MonoBehaviourPunCallbacks
 
             if (PhotonNetwork.IsMasterClient)
             {
+                waitingText.SetActive(true);
                 startRace.SetActive(true);
             }
             else

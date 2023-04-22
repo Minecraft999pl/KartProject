@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DrivingScript : MonoBehaviour
 {
@@ -21,6 +22,22 @@ public class DrivingScript : MonoBehaviour
     
     public GameObject backLights;
     public GameObject cameraTarget;
+
+    public float nitroFuel = 3;
+    public GameObject nitroLights;
+
+    public Text nitroText;
+
+    private void Start()
+    {
+        nitroText = GameObject.FindGameObjectWithTag("Fuel").GetComponent<Text>();
+        ChangeFuelText();
+    }
+
+    public void ChangeFuelText()
+    {
+        nitroText.text = nitroFuel.ToString();
+    }
 
 
     public void Drive(float accel, float brake, float steer)
@@ -83,5 +100,26 @@ public class DrivingScript : MonoBehaviour
         float pitch = Mathf.Lerp(1, 6, rpm);
         engineSound.pitch = Mathf.Min(6, pitch) * 0.15f;
 
+    }
+
+    void Boost(float boostPower)
+    {
+        rb.AddForce(rb.gameObject.transform.forward * boostPower);
+    }
+
+    public void Nitro(bool isOn)
+    {
+        if(nitroFuel > 0 && isOn)
+        {
+            Boost(1000000);
+            nitroFuel -= 1f;
+            nitroFuel = Mathf.Clamp(nitroFuel, 0, 5);
+            ChangeFuelText();
+            nitroLights.SetActive(true);
+        }
+        else
+        {
+            nitroLights.SetActive(false);
+        }
     }
 }
