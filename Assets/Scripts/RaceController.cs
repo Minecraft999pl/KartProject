@@ -28,9 +28,10 @@ public class RaceController : MonoBehaviourPunCallbacks
     public GameObject waitingText;
 
     public RawImage mirror;
+    private int finishedLaps = 0;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
         endPanel.SetActive(false);
@@ -107,7 +108,6 @@ public class RaceController : MonoBehaviourPunCallbacks
 
     void LateUpdate()
     {
-        int finishedLaps = 0;
         foreach(CheckPointController controller in carsController)
         {
             if(controller.lap == totalLaps + 1)

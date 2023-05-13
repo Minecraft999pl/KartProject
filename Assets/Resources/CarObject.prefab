@@ -343,10 +343,10 @@ GameObject:
   - component: {fileID: 2656196849527428016}
   - component: {fileID: 2656196849527428017}
   - component: {fileID: 2656196849527428014}
-  - component: {fileID: 8687649949102653585}
   - component: {fileID: 7361268188510885059}
   - component: {fileID: 6680741877612600538}
   - component: {fileID: 6265074428568088814}
+  - component: {fileID: 5328051027831678628}
   m_Layer: 0
   m_Name: CarBody
   m_TagString: Car
@@ -414,22 +414,6 @@ MonoBehaviour:
   backWheels:
   - {fileID: 2656196851033179316}
   - {fileID: 2656196849317081856}
---- !u!114 &8687649949102653585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2656196849527428019}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d241db4ee18cc42a27e4f577da2e98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lap: 0
-  checkPoint: -1
-  nextPoint: 0
-  lastPoint: {fileID: 0}
 --- !u!114 &7361268188510885059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +470,22 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &5328051027831678628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2656196849527428019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d241db4ee18cc42a27e4f577da2e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lap: 0
+  checkPoint: -1
+  nextPoint: 0
+  lastPoint: {fileID: 0}
 --- !u!1 &2656196849561354300
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,13 +686,10 @@ GameObject:
   - component: {fileID: 3126688707659117429}
   - component: {fileID: 2656196849773856103}
   - component: {fileID: 2656196849773856100}
-  - component: {fileID: 1670542405275798783}
   - component: {fileID: 5156772817191397178}
   - component: {fileID: 7032780848198899619}
   - component: {fileID: 6021278437824291114}
-  - component: {fileID: 8407097556889403831}
-  - component: {fileID: 4280686815487601724}
-  - component: {fileID: 980962527763798226}
+  - component: {fileID: 760544157773043379}
   m_Layer: 0
   m_Name: CarObject
   m_TagString: Untagged
@@ -707,14 +704,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2656196849773856104}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 51.147133, y: 0.0000019073486, z: -74.84033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2656196849527428016}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3126688707659117429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,25 +852,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1670542405275798783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2656196849773856104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e0401379763064f8e7083736888ad4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerName: Player Name
-  carColor: {r: 0, g: 0, b: 0, a: 1}
-  nameText: {fileID: 1988599832778057224}
-  carRenderer: {fileID: 3683136731025632218}
-  playerNumber: 2
-  backCamera: {fileID: 8556881520688317854}
-  checkPoint: {fileID: 8687649949102653585}
 --- !u!114 &5156772817191397178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +884,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6021278437824291114}
-  - {fileID: 980962527763798226}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -926,7 +903,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &8407097556889403831
+--- !u!114 &760544157773043379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -935,45 +912,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2656196849773856104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d241db4ee18cc42a27e4f577da2e98, type: 3}
+  m_Script: {fileID: 11500000, guid: 96e0401379763064f8e7083736888ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lap: 0
-  checkPoint: -1
-  nextPoint: 0
-  lastPoint: {fileID: 0}
---- !u!54 &4280686815487601724
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2656196849773856104}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &980962527763798226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2656196849773856104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 1
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  playerName: Player Name
+  carColor: {r: 0, g: 0, b: 0, a: 1}
+  nameText: {fileID: 1988599832778057224}
+  carRenderer: {fileID: 3683136731025632218}
+  playerNumber: 2
+  backCamera: {fileID: 8556881520688317854}
+  checkPoint: {fileID: 5328051027831678628}
 --- !u!1 &2656196849971010253
 GameObject:
   m_ObjectHideFlags: 0
